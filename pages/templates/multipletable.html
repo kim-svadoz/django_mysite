@@ -1,0 +1,15 @@
+<p>{{result}}</p>
+<h1>Django Temlplate Lagnuage ( DTL )</h1>
+
+<!--  -->
+{# 이게 DTL의 주석 #}
+{% comment %}
+DTL의 주석은 개발자모드(F12) 에서도 보이지 않는다!
+여기는 전부
+출력이 안됨... 주석임!
+되도록이면 template에서는 주석사용 XX
+{% endcomment %}
+
+{% for num in result %}
+  <p>{{num}}</p>
+{% endfor %}

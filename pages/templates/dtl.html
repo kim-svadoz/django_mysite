@@ -1,0 +1,47 @@
+<h1>1. for문</h1>
+{% for food in mList %}
+  <p> {{ forloop.counter }}.{{ food }} </p>
+{% endfor %}
+
+{% for data in empty_list %}
+  <p>data</p>
+{% empty %}
+  <p>비어있습니다.</p>
+{% endfor %}
+<hr>
+
+<h1>2. 조건문</h1>
+{% for food in mList %}
+  {% if food == '짜장면' %}
+    <p>짜장면엔 고춧가루지 아암 이게맞지</p>
+  {% else %}
+    <p>뭔 소리야 {{ food }}을 먹어줘야지</p>
+  {% endif %}
+{% endfor %}
+<hr>
+
+{% for food in mList %}
+  {% if forloop.first %}
+    <p> {{forloop.first}} </p>
+    <p> {{forloop.last}} </p>
+    <p>짜장면엔 고춧가루지 아암 이게맞지</p>
+  {% else %}
+    <p>뭔 소리야 {{ food }}을 먹어줘야지</p>
+  {% endif %}
+{% endfor %}
+<hr>
+
+<h1>3. filter 활용</h1>
+  <p>{{ mString|lower }}</p>
+  <p>{{ mString|upper }}</p>
+  <p>{{ mString|title }}</p>
+  <p>{{ mString|length }}</p>
+  <p>{{ mString|truncatewords:3 }}</p>
+  <p>{{ mString|truncatechars:10 }}</p>
+<hr>
+
+<h1>4. lorem ipsum</h1>
+<p>{% lorem %}</p>
+<p>{% lorem 3 w %}</p>
+<p>{% lorem 3 p %}</p>
+
