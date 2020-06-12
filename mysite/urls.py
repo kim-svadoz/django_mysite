@@ -30,4 +30,7 @@ urlpatterns = [
     path('multipletable/<int:big>/<int:small>', views.multipletable),
     path('dtl/', views.dtl),
     path('forif/', views.forif),
+    path('loop/', views.loop),
+    path('throw/', views.throw),
+    path('catch/', views.catch),
 ]
