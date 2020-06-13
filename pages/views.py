@@ -1,19 +1,20 @@
 from django.shortcuts import render
 import random
 from datetime import datetime
+import requests
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'pages/index.html')
 
 def hello(request):
     menu = ['닭갈비', '탕수육', '초밥', '스파게티돈가스']
     pick = random.choice(menu)
-    return render(request, 'hello.html', {'pick':pick})
+    return render(request, 'pages/hello.html', {'pick':pick})
 
 def name(request):
     my_name = '김성현'
-    return render(request, 'name.html', {'my_name':my_name})
+    return render(request, 'pages/name.html', {'my_name':my_name})
 
 def introduce(request):
     my_info = ['김성현', '28', '서울 관악구', 'https://github.com/kim-svadoz']
@@ -27,7 +28,7 @@ def introduce(request):
         'home' : home,
         'git' : git
     }
-    return render(request, 'introduce.html', context)
+    return render(request, 'pages/introduce.html', context)
 
 def classRandomChoice(request):
     arr = ['백승재', '심재민', '유환우', '강인선', '신승환']
@@ -35,14 +36,14 @@ def classRandomChoice(request):
     context = {
         'pick' : pick
     }
-    return render(request, 'classRandomChoice.html', context)
+    return render(request, 'pages/classRandomChoice.html', context)
 
 def yourname(request, name):
     name = name
     context={
         'name' : name
     }
-    return render(request, 'yourname.html', context)
+    return render(request, 'pages/yourname.html', context)
 
 def urlcopy(request, name, age):
     name = name
@@ -51,7 +52,7 @@ def urlcopy(request, name, age):
         'name' : name,
         'age' : age
     }
-    return render(request, 'urlcopy.html', context)
+    return render(request, 'pages/urlcopy.html', context)
 
 def multiply(request, num1, num2):
     num1 = num1
@@ -62,7 +63,7 @@ def multiply(request, num1, num2):
         'num2' : num2,
         'result' : result
     }
-    return render(request, 'multiply.html', context)
+    return render(request, 'pages/multiply.html', context)
 
 def multipletable(request, big, small):
     result = []
@@ -73,7 +74,7 @@ def multipletable(request, big, small):
     context={
         'result' : result
     }
-    return render(request, 'multipletable.html', context)
+    return render(request, 'pages/multipletable.html', context)
 
 def dtl(request):
     mList = ['짜장면', '차돌짬뽕', '탕수육', '콩국수']
@@ -86,7 +87,7 @@ def dtl(request):
         'mString' : mString,
         'today' : today
     }
-    return render(request, 'dtl.html', context)
+    return render(request, 'pages/dtl.html', context)
 
 # 1. 간단한 반복문으로 리스트 각 요소를 출력
 # 2. if, else 활용해서 문자열 비교
@@ -114,7 +115,7 @@ def forif(request):
         'data_a' : data_a,
         'data_b' : data_b
     }
-    return render(request, 'forif.html', context)
+    return render(request, 'pages/forif.html', context)
 
 def loop(request):
     nums = []
@@ -123,18 +124,52 @@ def loop(request):
     context = {
         'nums': nums
     }
-    return render(request, 'loop.html', context)
+    return render(request, 'pages/loop.html', context)
 
 def throw(request):
-    return render(request, 'throw.html')
+    return render(request, 'pages/throw.html')
 
 def catch(request):
     # request parameter는 요청 정보가 담겨있다.
     # request.GET == 딕셔너리와 유사하다.
     # request.GET != dict()
     # data = request.GET['message']
-    data = request.GET.get('message')
+    name = request.GET.get('name')
+    age = request.GET.get('age')
     context ={ 
-        'data': data
+        'name' : name,
+        'age' : age
     }
-    return render(request, 'catch.html', context)
+    return render(request, 'pages/catch.html', context)
+
+# 1. 사용자가 숫자 입력
+# 2. 입력 받은 횟수 만큼 반복해서
+# 3. 리스트에 로또 번호 담는다.
+# 3-1. random.sample(range(1, 46), 6)
+# 4. 사용자가 입력한 숫자와 로또번호가 담긴 리스트를 출력
+# 5. ul태그를 사용하여 각 번호들을 한줄 씩 출력
+def lottoT(request):
+    return render(request, 'pages/lottoT.html')
+
+def lottoC(request):
+    num = int(request.GET.get('num'))
+    lottos = []
+    for data in range(num):
+        lottos.append(random.sample(range(1, 46), 6))
+    context={
+        'num' : num,
+        'lottos' : lottos,
+    }
+
+    return render(request, 'pages/lottoC.html', context)
+
+def artii(request):
+    return render(request, 'pages/artii.html')
+
+def result(request):
+    msg = request.GET.get('msg')
+    result = requests.get(f'http://artii.herokuapp.com/make?text={msg}').text
+    context = {
+        'result' : result
+    }
+    return render(request, 'pages/result.html', context)

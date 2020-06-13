@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}
+  pagesIndex
+{% endblock %}
+
+{% block body %}
+  <h1>Hello World 1</h1>
+  <a href="{% url 'secondapp:index' %}">secondapp 인덱스</a>
+{% endblock %}
